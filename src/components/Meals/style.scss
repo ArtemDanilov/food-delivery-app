@@ -1,0 +1,11 @@
+.meal {
+  .list {
+    li {
+      @apply flex items-center text-base;
+    }
+
+    li > span {
+      @apply w-6 h-6 mr-2;
+    }
+  }
+}
