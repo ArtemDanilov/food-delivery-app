@@ -1,26 +1,27 @@
-import React from 'react';
-import {createBrowserRouter, RouterProvider} from 'react-router-dom';
-import ReactDOM from 'react-dom/client';
+import React from "react";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import ReactDOM from "react-dom/client";
 
-import Layout from './layout/Default';
-import Home from './templates/Home';
+import Layout from "./layout/Default";
+import Home, { loader as MealsLoader } from "./templates/Home";
 
-import './index.scss';
+import "./index.scss";
 
 const router = createBrowserRouter([
   {
-    path: '/',
+    path: "/",
     element: <Layout />,
     children: [
       {
         index: true,
         element: <Home />,
+        loader: MealsLoader,
       },
     ],
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <RouterProvider router={router} />
   </React.StrictMode>
