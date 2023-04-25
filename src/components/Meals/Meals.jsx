@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "../Button";
 
 import Meal from "./Meal";
 
@@ -10,7 +11,7 @@ const Meals = (props) => {
       <ul className="space-y-4">
         {data.meals.map((meal) => (
           <li key={meal.id}>
-            <Meal {...meal} />
+            <Meal button="single" {...meal} />
           </li>
         ))}
       </ul>
