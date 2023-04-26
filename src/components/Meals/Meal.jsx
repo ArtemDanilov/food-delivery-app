@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import ForkAndSpoon from "../../svg/ForkAndSpoon";
 import Star from "../../svg/Star";
@@ -6,8 +6,19 @@ import Money from "../../svg/Money";
 
 import "./style.scss";
 import Button from "../Button";
+import BasketContext from "../../store/basket-context";
 
 const Meal = (props) => {
+  const bskCtx = useContext(BasketContext);
+
+  const addMealItem = () => {
+    bskCtx.addItem({
+      id: props.id,
+      name: props.name,
+      price: props.price,
+    });
+  };
+
   const currency = "$";
 
   return (
@@ -59,7 +70,7 @@ const Meal = (props) => {
         {props.button && (
           <div className="p-2">
             {props.button === "single" ? (
-              <Button>+ Add</Button>
+              <Button onClick={addMealItem}>+ Add</Button>
             ) : (
               <Button>Add more</Button>
             )}
