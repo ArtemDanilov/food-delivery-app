@@ -5,8 +5,10 @@ import Star from "../../svg/Star";
 import Money from "../../svg/Money";
 
 import "./style.scss";
+
 import Button from "../Button";
 import BasketContext from "../../store/basket-context";
+import MealDetails from "./MealDetails";
 
 const Meal = (props) => {
   const bskCtx = useContext(BasketContext);
@@ -21,6 +23,21 @@ const Meal = (props) => {
 
   const currency = "$";
 
+  const mealDetails = [
+    {
+      detail: `${currency}${props.price}`,
+      icon: <Money width="20" height="20" />,
+    },
+    {
+      detail: props.rating,
+      icon: <Star width="20" height="20" />,
+    },
+    {
+      detail: props.cuisine,
+      icon: <ForkAndSpoon width="20" height="20" />,
+    },
+  ];
+
   return (
     <div className="meal w-full max-w-[30rem] overflow-hidden bg-white border border-gray-300 rounded-lg sm:flex sm:max-w-none">
       {props.image && (
@@ -33,39 +50,7 @@ const Meal = (props) => {
         />
       )}
       <div className="w-full p-2 flex justify-between items-end">
-        <div>
-          <h3 className="font-bold text-xl mb-2 sm:text-2xl sm:mb-3">
-            {props.name}
-          </h3>
-
-          <ul className="list space-y-0.5 sm:space-y-1">
-            {props.price && (
-              <li>
-                <span>
-                  <Money width="20" height="20" />
-                </span>
-                {currency}
-                {props.price}
-              </li>
-            )}
-            {props.rating && (
-              <li>
-                <span>
-                  <Star width="20" height="20" />
-                </span>
-                {props.rating}
-              </li>
-            )}
-            {props.cuisine && (
-              <li>
-                <span>
-                  <ForkAndSpoon width="20" height="20" />
-                </span>
-                {props.cuisine}
-              </li>
-            )}
-          </ul>
-        </div>
+        <MealDetails name={props.name} array={mealDetails} />
 
         {props.button && (
           <div className="p-2">
