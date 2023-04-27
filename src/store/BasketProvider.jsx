@@ -3,7 +3,6 @@ import React, { useReducer } from "react";
 import BasketContext from "./basket-context";
 
 const basket = {
-  id: null,
   meals: [],
   counter: 0,
   totalPrice: 0,
@@ -40,7 +39,6 @@ const reducer = (state, action) => {
     );
 
     return {
-      id: state.id,
       meals: updatedMeals,
       counter: updatedCounter,
       totalPrice: updatedTotalPrice,

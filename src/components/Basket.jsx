@@ -4,7 +4,7 @@ import Modal from "./Modal";
 import Meal from "./Meals/Meal";
 
 import BasketIcon from "../svg/basket";
-import Button from "./Button";
+import Button from "./Button/Button";
 import BasketContext from "../store/basket-context";
 
 const Basket = () => {
@@ -35,9 +35,9 @@ const Basket = () => {
 
       {isModalVisible && bskCtx.counter !== 0 && (
         <Modal onClose={closeBasket}>
-          {bskCtx.meals.map(({ id, name, price, amount }) => (
-            <div key={id} className="p-2">
-              <Meal name={name} price={price} amount={amount} />
+          {bskCtx.meals.map((meal) => (
+            <div key={meal.id} className="p-2">
+              <Meal {...meal} buttonSize="small" button="addAndRemove" />
             </div>
           ))}
 

@@ -6,7 +6,7 @@ import Money from "../../svg/Money";
 
 import "./style.scss";
 
-import Button from "../Button";
+import Button from "../Button/Button";
 import BasketContext from "../../store/basket-context";
 import MealDetails from "./MealDetails";
 
@@ -20,6 +20,10 @@ const Meal = (props) => {
       price: props.price,
       amount: 1,
     });
+  };
+
+  const removeMealItem = () => {
+    bskCtx.removeItem();
   };
 
   const currency = "$";
@@ -57,13 +61,19 @@ const Meal = (props) => {
           amount={props.amount}
         />
 
-        {props.button && (
+        {props.button === "add" && (
           <div className="p-2">
-            {props.button === "single" ? (
-              <Button onClick={addMealItem}>+ Add</Button>
-            ) : (
-              <Button>Add more</Button>
-            )}
+            <Button onClick={addMealItem}>+ Add</Button>
+          </div>
+        )}
+        {props.button === "addAndRemove" && (
+          <div className="p-2 flex space-x-2">
+            <Button size={props.buttonSize} onClick={addMealItem}>
+              +
+            </Button>
+            <Button size={props.buttonSize} onClick={removeMealItem}>
+              -
+            </Button>
           </div>
         )}
       </div>
