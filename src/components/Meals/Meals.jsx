@@ -10,7 +10,7 @@ const Meals = (props) => {
       <ul className="space-y-4">
         {data.meals.map((meal) => (
           <li key={meal.id}>
-            <Meal button="single" {...meal} />
+            <Meal button="add" {...meal} />
           </li>
         ))}
       </ul>
