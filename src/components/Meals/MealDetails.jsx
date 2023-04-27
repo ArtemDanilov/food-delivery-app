@@ -5,6 +5,9 @@ const MealDetails = (props) => {
     <div className={props.classes}>
       <h3 className="font-bold text-xl mb-2 sm:text-2xl sm:mb-3">
         {props.name}
+        {props.amount > 1 && (
+          <span className="pl-4 text-gray-500">x {props.amount}</span>
+        )}
       </h3>
 
       <ul className="list space-y-0.5 sm:space-y-1">

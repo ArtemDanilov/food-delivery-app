@@ -18,6 +18,7 @@ const Meal = (props) => {
       id: props.id,
       name: props.name,
       price: props.price,
+      amount: 1,
     });
   };
 
@@ -50,7 +51,11 @@ const Meal = (props) => {
         />
       )}
       <div className="w-full p-2 flex justify-between items-end">
-        <MealDetails name={props.name} array={mealDetails} />
+        <MealDetails
+          array={mealDetails}
+          name={props.name}
+          amount={props.amount}
+        />
 
         {props.button && (
           <div className="p-2">

@@ -35,15 +35,15 @@ const Basket = () => {
 
       {isModalVisible && bskCtx.counter !== 0 && (
         <Modal onClose={closeBasket}>
-          {bskCtx.meals.map(({ id, name, price }) => (
+          {bskCtx.meals.map(({ id, name, price, amount }) => (
             <div key={id} className="p-2">
-              <Meal name={name} price={price} />
+              <Meal name={name} price={price} amount={amount} />
             </div>
           ))}
 
           <div className="flex flex-col items-end px-2 pt-4 pb-2">
             <h3 className="text-lg font-bold text-right mb-2 sm:text-2xl">
-              <span className="text-green-600">${bskCtx.amount}</span>
+              <span className="text-green-600">${bskCtx.totalPrice}</span>
             </h3>
             <Button>Go to payment</Button>
           </div>

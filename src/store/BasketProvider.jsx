@@ -6,20 +6,44 @@ const basket = {
   id: null,
   meals: [],
   counter: 0,
-  amount: 0,
+  totalPrice: 0,
 };
 
 const reducer = (state, action) => {
   if (action.type === "addItem") {
-    const updatedMeals = state.meals.concat(action.item);
-    const updatedCounter = updatedMeals.length;
-    const updatedAmount = updatedMeals.reduce((acc, crr) => acc + crr.price, 0);
+    let updatedMeals;
+
+    const existingMealsCounter = state.meals.findIndex(
+      (meal) => meal.id === action.item.id
+    );
+    const existingMeal = state.meals[existingMealsCounter];
+
+    if (existingMeal) {
+      const updatedMeal = {
+        ...existingMeal,
+        amount: existingMeal.amount + 1,
+      };
+      updatedMeals = [...state.meals];
+      updatedMeals[existingMealsCounter] = updatedMeal;
+    } else {
+      updatedMeals = state.meals.concat(action.item);
+    }
+
+    const updatedCounter = updatedMeals.reduce(
+      (acc, crr) => acc + crr.amount,
+      0
+    );
+
+    const updatedTotalPrice = updatedMeals.reduce(
+      (acc, crr) => acc + crr.price * crr.amount,
+      0
+    );
 
     return {
       id: state.id,
       meals: updatedMeals,
       counter: updatedCounter,
-      amount: updatedAmount,
+      totalPrice: updatedTotalPrice,
     };
   }
   return state;
@@ -37,7 +61,7 @@ const BasketProvider = ({ children }) => {
   const context = {
     meals: basketState.meals,
     counter: basketState.counter,
-    amount: basketState.amount,
+    totalPrice: basketState.totalPrice,
     addItem: addContextItem,
     removeItem: removeContextItem,
   };
