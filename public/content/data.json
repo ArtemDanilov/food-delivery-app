@@ -1,0 +1,22 @@
+{
+  "meals": [
+    {
+      "id": 1,
+      "name": "Burger with pulled beef",
+      "image": "https://images.lecker.de/pulled-beef-burger-mit-apfel-coleslaw,id=6285df78,b=lecker,w=1600,h=,ca=11.05,0,88.95,100,rm=sk.jpeg",
+      "price": 12.5,
+      "rating": 4.2,
+      "tags": ["burgers", "beaf"],
+      "cuisine": "american"
+    },
+    {
+      "id": 2,
+      "name": "Pork Ramen",
+      "image": "https://www.kitchensanctuary.com/wp-content/uploads/2016/07/Spicy-pork-ramen-noodle-soup-square-FS-500x500.jpg",
+      "price": 15,
+      "rating": 4.6,
+      "tags": ["ramen", "pork"],
+      "cuisine": "asian"
+    }
+  ]
+}

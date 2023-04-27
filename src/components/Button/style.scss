@@ -1,0 +1,9 @@
+button {
+  &.small {
+    @apply py-0.5 px-2;
+  }
+
+  &.medium {
+    @apply py-1 px-4;
+  }
+}
