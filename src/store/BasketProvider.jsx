@@ -9,9 +9,8 @@ const basket = {
 };
 
 const reducer = (state, action) => {
+  let updatedMeals;
   if (action.type === "addItem") {
-    let updatedMeals;
-
     const existingMealsCounter = state.meals.findIndex(
       (meal) => meal.id === action.item.id
     );
@@ -22,6 +21,7 @@ const reducer = (state, action) => {
         ...existingMeal,
         amount: existingMeal.amount + 1,
       };
+
       updatedMeals = [...state.meals];
       updatedMeals[existingMealsCounter] = updatedMeal;
     } else {
@@ -44,6 +44,44 @@ const reducer = (state, action) => {
       totalPrice: updatedTotalPrice,
     };
   }
+
+  if (action.type === "removeItem") {
+    let updatedMeals;
+
+    const existingMealsCounter = state.meals.findIndex(
+      (meal) => meal.id === action.id
+    );
+    const existingMeal = state.meals[existingMealsCounter];
+
+    if (existingMeal.amount > 1) {
+      const updatedMeal = {
+        ...existingMeal,
+        amount: existingMeal.amount - 1,
+      };
+
+      updatedMeals = [...state.meals];
+      updatedMeals[existingMealsCounter] = updatedMeal;
+    } else {
+      updatedMeals = state.meals.filter((meal) => meal.id !== action.id);
+    }
+
+    const updatedCounter = updatedMeals.reduce(
+      (acc, crr) => acc + crr.amount,
+      0
+    );
+
+    const updatedTotalPrice = updatedMeals.reduce(
+      (acc, crr) => acc + crr.price * crr.amount,
+      0
+    );
+
+    return {
+      meals: updatedMeals,
+      counter: updatedCounter,
+      totalPrice: updatedTotalPrice,
+    };
+  }
+
   return state;
 };
 
@@ -54,7 +92,9 @@ const BasketProvider = ({ children }) => {
     dispatchBasketState({ type: "addItem", item: item });
   };
 
-  const removeContextItem = (id) => {};
+  const removeContextItem = (id) => {
+    dispatchBasketState({ type: "removeItem", id: id });
+  };
 
   const context = {
     meals: basketState.meals,

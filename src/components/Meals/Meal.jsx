@@ -23,7 +23,7 @@ const Meal = (props) => {
   };
 
   const removeMealItem = () => {
-    bskCtx.removeItem();
+    bskCtx.removeItem(props.id);
   };
 
   const currency = "$";
