@@ -5,7 +5,7 @@ import ReactDOM from "react-dom/client";
 import Layout from "./layout/Default";
 import Home, { loader as MealsLoader } from "./templates/Home";
 
-import "./index.scss";
+import "./scss/index.scss";
 
 const router = createBrowserRouter([
   {

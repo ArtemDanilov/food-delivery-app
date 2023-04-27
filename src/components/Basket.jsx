@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 import Modal from "./Modal";
 import Meal from "./Meals/Meal";
@@ -8,9 +8,10 @@ import Button from "./Button/Button";
 import BasketContext from "../store/basket-context";
 
 const Basket = () => {
-  const [isModalVisible, setModalVisibility] = useState(false);
-
   const bskCtx = useContext(BasketContext);
+
+  const [isModalVisible, setModalVisibility] = useState(false);
+  const [animClass, setAnimClass] = useState(false);
 
   const openBasket = () => {
     setModalVisibility(true);
@@ -20,6 +21,24 @@ const Basket = () => {
     setModalVisibility(false);
   };
 
+  const { meals } = bskCtx;
+
+  useEffect(() => {
+    if (meals.length == 0) {
+      return;
+    }
+
+    setAnimClass(true);
+
+    const animTimeout = setTimeout(() => {
+      setAnimClass(false);
+    }, 300);
+
+    return () => {
+      clearTimeout(animTimeout);
+    };
+  }, [meals]);
+
   return (
     <>
       <button onClick={openBasket} className="relative bg-white p-1 rounded-md">
@@ -27,7 +46,11 @@ const Basket = () => {
         <BasketIcon width="32" height="32" classes="text-black" />
 
         {bskCtx.counter !== 0 && (
-          <span className="absolute -bottom-2 -right-2 flex justify-center items-center bg-red-600 text-xs text-white text-bold w-5 h-5 rounded-full">
+          <span
+            className={`${
+              animClass && "anim-pump"
+            } absolute -bottom-2 -right-2 flex justify-center items-center bg-red-600 text-xs text-white text-bold w-5 h-5 rounded-full`}
+          >
             {bskCtx.counter}
           </span>
         )}
